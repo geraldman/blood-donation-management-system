@@ -4,6 +4,14 @@
         <servlet-name>Admin</servlet-name>
         <servlet-class>model.Admin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ActivityHistory</servlet-name>
+        <servlet-class>model.ActivityHistory</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteDonorServlet</servlet-name>
+        <servlet-class>servlet.DeleteDonorServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Admin</servlet-name>
         <url-pattern>/Admin</url-pattern>
@@ -67,6 +75,14 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+    <servlet-mapping>
+        <servlet-name>ActivityHistory</servlet-name>
+        <url-pattern>/ActivityHistory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteDonorServlet</servlet-name>
+        <url-pattern>/DeleteDonorServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

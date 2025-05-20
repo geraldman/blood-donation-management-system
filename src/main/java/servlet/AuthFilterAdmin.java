@@ -19,38 +19,37 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 /**
  *
  * @author geral
  */
-
-@WebFilter(urlPatterns = {"/userdashboard.jsp","/request.jsp", "/donate.jsp", "/request-history.jsp", "/donate-history.jsp"})
-public class AuthFilter implements Filter {
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-	throws IOException, ServletException{
-
+@WebFilter(urlPatterns = {"/admindashboard.jsp"})
+public class AuthFilterAdmin implements Filter {
+    public void doFilter(ServletRequest request, ServletResponse response,
+	    FilterChain chain)
+	    throws IOException, ServletException {
 	HttpServletRequest req = (HttpServletRequest) request;
 	HttpServletResponse resp = (HttpServletResponse) response;
 	HttpSession session = req.getSession(false);
 
-	boolean loggedIn = session != null && session.getAttribute("user") != null;
-
-	if(!loggedIn){
+	boolean loggedInUser = session != null && session.getAttribute("admin") != null;
+	if(!loggedInUser){
 	    resp.sendRedirect("login.jsp");
 	}
 	else{
 	    chain.doFilter(request, response);
 	}
-
     }
-    
-    @Override
+
+    public void destroy() {
+    }
+
+    /**
+     * Init method for this filter
+     */
     public void init(FilterConfig filterConfig) throws ServletException{
 	
     }
-    
-    @Override
-    public void destroy(){
-	
-    }
+
 }

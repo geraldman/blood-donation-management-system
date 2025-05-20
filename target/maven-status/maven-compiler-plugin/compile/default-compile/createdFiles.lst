@@ -1,5 +1,4 @@
 servlet\LogoutServlet.class
-servlet\AuthFilter.class
 model\Donors.class
 dao\DonorDAO.class
 model\Blood.class
@@ -11,7 +10,6 @@ servlet\LoginServlet.class
 dao\DBConnection.class
 model\Users.class
 dao\UsersDAO.class
-dao\AdminLoginServlet.class
 servlet\RegisterServlet.class
 servlet\AdminServlet.class
 servlet\DonorServlet.class

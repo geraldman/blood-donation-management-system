@@ -11,11 +11,12 @@ public class Donors {
     private int    userId;
     private Date   lastDonationDate; // convenience
     private int    bloodId;
-    private int	   bloodName;
+    private String bloodName;
+    private String username;
 
 
     public Donors() { }
-
+    
     public Donors(int userId, Date lastDonationDate, int bloodId) {
         this.userId           = userId;
         this.lastDonationDate = lastDonationDate;
@@ -29,10 +30,16 @@ public class Donors {
 
     public int  getBloodId()               { return bloodId; }
     public void setBloodId(int bid)        { this.bloodId = bid; }
-
+    
+    public String getBloodName()	    { return bloodName; }
+    public void setBloodName(String a)	    { this.bloodName = a; }
+    
     public Date getLastDonationDate()      { return lastDonationDate; }
     public void setLastDonationDate(Date d){ this.lastDonationDate = d; }
-
+    
+    public String getUsername()		   { return username; }
+    public void setUsername(String a)	   { this.username = a;}
+    
     // aliases your DonorServlet expects:
     public void setDonorBloodId(int bid)                  { setBloodId(bid); }
     public void setDonorLastDonationDate(java.sql.Date d) { setLastDonationDate(d); }

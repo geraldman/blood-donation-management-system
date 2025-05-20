@@ -1,8 +1,8 @@
 C:\Users\geral\Documents\code\Projects\java\blood-donation-netbeans\blood-donation-management-system_01\src\main\java\dao\AdminDAO.java
-C:\Users\geral\Documents\code\Projects\java\blood-donation-netbeans\blood-donation-management-system_01\src\main\java\servlet\AuthFilter.java
 C:\Users\geral\Documents\code\Projects\java\blood-donation-netbeans\blood-donation-management-system_01\src\main\java\servlet\LogoutServlet.java
 C:\Users\geral\Documents\code\Projects\java\blood-donation-netbeans\blood-donation-management-system_01\src\main\java\dao\BloodDAO.java
 C:\Users\geral\Documents\code\Projects\java\blood-donation-netbeans\blood-donation-management-system_01\src\main\java\dao\DonorDAO.java
+C:\Users\geral\Documents\code\Projects\java\blood-donation-netbeans\blood-donation-management-system_01\src\main\java\servlet\AuthFilterAdmin.java
 C:\Users\geral\Documents\code\Projects\java\blood-donation-netbeans\blood-donation-management-system_01\src\main\java\model\Blood.java
 C:\Users\geral\Documents\code\Projects\java\blood-donation-netbeans\blood-donation-management-system_01\src\main\java\model\Users.java
 C:\Users\geral\Documents\code\Projects\java\blood-donation-netbeans\blood-donation-management-system_01\src\main\java\model\Admin.java
@@ -13,7 +13,9 @@ C:\Users\geral\Documents\code\Projects\java\blood-donation-netbeans\blood-donati
 C:\Users\geral\Documents\code\Projects\java\blood-donation-netbeans\blood-donation-management-system_01\src\main\java\dao\UsersDAO.java
 C:\Users\geral\Documents\code\Projects\java\blood-donation-netbeans\blood-donation-management-system_01\src\main\java\servlet\RequestServlet.java
 C:\Users\geral\Documents\code\Projects\java\blood-donation-netbeans\blood-donation-management-system_01\src\main\java\servlet\AdminServlet.java
-C:\Users\geral\Documents\code\Projects\java\blood-donation-netbeans\blood-donation-management-system_01\src\main\java\dao\AdminLoginServlet.java
+C:\Users\geral\Documents\code\Projects\java\blood-donation-netbeans\blood-donation-management-system_01\src\main\java\servlet\AuthFilterUser.java
+C:\Users\geral\Documents\code\Projects\java\blood-donation-netbeans\blood-donation-management-system_01\src\main\java\servlet\DeleteDonorServlet.java
+C:\Users\geral\Documents\code\Projects\java\blood-donation-netbeans\blood-donation-management-system_01\src\main\java\model\ActivityHistory.java
 C:\Users\geral\Documents\code\Projects\java\blood-donation-netbeans\blood-donation-management-system_01\src\main\java\model\Requests.java
 C:\Users\geral\Documents\code\Projects\java\blood-donation-netbeans\blood-donation-management-system_01\src\main\java\servlet\DonorServlet.java
 C:\Users\geral\Documents\code\Projects\java\blood-donation-netbeans\blood-donation-management-system_01\src\main\java\servlet\AdminLoginServlet.java

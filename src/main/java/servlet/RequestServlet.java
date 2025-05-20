@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
+import java.sql.Date;
 
 public class RequestServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -24,11 +26,13 @@ public class RequestServlet extends HttpServlet {
         
         int bloodId = Integer.parseInt(request.getParameter("bloodType"));
         int quantity = Integer.parseInt(request.getParameter("quantity"));
-        
+	LocalDate today = LocalDate.now();
+		
         Requests bloodRequest = new Requests();
         bloodRequest.setRequesterId(user.getUserId());
         bloodRequest.setRequesterBloodId(bloodId);
         bloodRequest.setRequestedBloodQuantity(quantity);
+	bloodRequest.setRequestDate(Date.valueOf(today));
         bloodRequest.setRequestStatus("Pending");
         
         try {

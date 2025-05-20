@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.*;
+import model.ActivityHistory;
 import model.Admin;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,5 +29,44 @@ public class AdminDAO {
             }
         }
         return null;
+    }
+    
+    public List<ActivityHistory> getRecentActivites() throws SQLException{
+	String sql = "SELECT \n" +
+		    "    'Donation' AS activity,\n" +
+		    "    b.blood_name,\n" +
+		    "    d.donor_last_donation_date AS date,\n" +
+		    "    u.user_name\n" +
+		    "FROM donors d\n" +
+		    "JOIN users u ON d.donor_user_id = u.user_id\n" +
+		    "JOIN blood b ON d.donor_blood_id = b.blood_id\n" +
+		    "\n" +
+		    "UNION\n" +
+		    "\n" +
+		    "SELECT \n" +
+		    "    'Request' AS activity,\n" +
+		    "    b.blood_name,\n" +
+		    "    r.request_date AS date,\n" +
+		    "    u.user_name\n" +
+		    "FROM requests r\n" +
+		    "JOIN users u ON r.requester_id = u.user_id\n" +
+		    "JOIN blood b ON r.requester_blood_id = b.blood_id\n" +
+		    "\n" +
+		    "ORDER BY date DESC";
+	List<ActivityHistory> list = new ArrayList<>();
+	try(Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+	     ResultSet rs = ps.executeQuery(sql)){
+            while(rs.next()) {
+                ActivityHistory history = new ActivityHistory(
+                    rs.getString("activity"),
+                    rs.getString("blood_name"),
+                    rs.getDate("date"),
+                    rs.getString("user_name")
+                );
+		list.add(history);
+	    }
+	}
+	return list;
     }
 }

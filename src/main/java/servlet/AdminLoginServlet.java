@@ -22,7 +22,7 @@ public class AdminLoginServlet extends HttpServlet {
             if (admin != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("admin", admin);
-                response.sendRedirect("admin/dashboard.jsp");
+                response.sendRedirect("admindashboard.jsp");
             } else {
                 request.setAttribute("error", "Invalid email or password");
                 request.getRequestDispatcher("login.jsp").forward(request, response);

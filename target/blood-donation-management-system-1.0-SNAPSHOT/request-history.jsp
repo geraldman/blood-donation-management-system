@@ -46,7 +46,7 @@
 		</div>
 	    </div>
 	</header>
-	<div class="auth-container" style="max-width: 700px">
+	<div class="auth-container" style="max-width: 800px">
 	    <div style="text-align: center; margin-bottom: 24px">
 		<h2>Request History</h2>
 		<p style="color: var(--gray); font-size: 1rem">
@@ -61,6 +61,7 @@
 				<th>Blood Type</th>
 				<th>Quantity</th>
 				<th>Request Fulfilled</th>
+				<th>Request Date</th>
 				<th>Status</th>
 			    </tr>
 			</thead>
@@ -72,6 +73,7 @@
 				if(list != null){
 				    for(Requests data : list){
 					String blood_name = data.getBloodName();
+					Date date = data.getRequestDate();
 					int requested_blood_quantity = data.getQuantity();
 					int requested_blood_fulfilled = data.getQuantityFulfilled();
 					String status = data.getStatus();
@@ -90,6 +92,7 @@
 					    <td><%=blood_name%></td>
 					    <td><%=requested_blood_quantity%></td>
 					    <td><%=requested_blood_fulfilled%></td>
+					    <td><%=date%></td>
 					    <td><div class="status <%=status_css%>"><%=status%></div></td>
 					</tr>
 				    <%}

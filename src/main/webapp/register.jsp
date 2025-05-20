@@ -85,19 +85,19 @@ contentType="text/html" pageEncoding="UTF-8"%>
             required
           />
         </div>
-<!--        <div class="form-group">
+        <div class="form-group">
           <label>Register as</label>
           <div class="user-type-group">
             <label class="user-type-option">
-              <input type="radio" name="userType" value="donor" checked />
-              <span class="user-type-label donor">Donor</span>
+              <input type="radio" name="userType" value=user" checked />
+              <span class="user-type-label donor">User</span>
             </label>
             <label class="user-type-option">
-              <input type="radio" name="userType" value="requester" />
-              <span class="user-type-label requester">Requester</span>
+              <input type="radio" name="userType" value="admin" />
+              <span class="user-type-label requester">Admin</span>
             </label>
           </div>
-        </div>-->
+        </div>
         <button type="submit" class="btn" style="width: 100%; margin-top: 18px">
           Register
         </button>

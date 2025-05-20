@@ -95,6 +95,19 @@ public class BloodDAO {
 	return null;
     }
     
+    public String findBloodNameByID(int BloodID) throws SQLException{
+	String sql = "SELECT blood_name FROM blood WHERE blood_id = ?";
+	String BloodName;
+	try(Connection conn = DBConnection.getConnection();
+	    PreparedStatement ps = conn.prepareStatement(sql)){
+	    ps.setInt(1, BloodID);
+	    try(ResultSet rs = ps.executeQuery()){
+		BloodName = rs.getString("blood_name");
+	    }
+	}
+	return BloodName;
+    }
+	
      public boolean incrementStock(int bloodId) throws SQLException {
         String sql = "UPDATE blood SET blood_stock = blood_stock + 1 WHERE blood_id = ?";
         try (Connection conn = DBConnection.getConnection();

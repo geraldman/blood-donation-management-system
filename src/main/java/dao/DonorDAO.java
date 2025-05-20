@@ -1,6 +1,5 @@
 package dao;
 
-import model.Blood;
 import model.Donors;
 import java.sql.*;
 import java.sql.Date;
@@ -22,20 +21,19 @@ public class DonorDAO {
         }
     }
     
-    public String findBloodNameByID(int BloodID) throws SQLException{
-	String sql = "SELECT blood_name WHERE blood_id = ?";
-	String BloodName;
-	try(Connection conn = DBConnection.getConnection();
+    public int getAllDonationCount() throws SQLException{
+	String sql = "SELECT COUNT(*) FROM donors";
+        try(Connection conn = DBConnection.getConnection();
 	    PreparedStatement ps = conn.prepareStatement(sql)){
-	    ps.setInt(1, BloodID);
-	    try(ResultSet rs = ps.executeQuery()){
-		BloodName = rs.getString("blood_name");
-	    }
-	}
-	return BloodName;
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                return rs.getInt(1);
+            }
+        }
+        return 0;
     }
     
-    public int getDonationCountByUser(int userId) throws SQLException {
+    public int getDonationCountByUser(int userId) throws SQLException{
         String sql = "SELECT COUNT(*) FROM donors WHERE donor_user_id = ?";
         try(Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)){
@@ -98,7 +96,36 @@ public class DonorDAO {
         }
         return list;
     }
-
+    
+    public List<Donors> getAllDonationHistory() throws SQLException{
+	String sql = "SELECT u.user_id, d.donor_last_donation_date, b.blood_name "
+		+ "FROM donors d JOIN users u ON d.donor_user_id = u.user_id "
+		+ "JOIN blood b ON d.donor_blood_id = b.blood_id";
+	List<Donors> list = new ArrayList<>();
+	try(Connection conn = DBConnection.getConnection();
+	    PreparedStatement ps = conn.prepareStatement(sql);
+	    ResultSet rs = ps.executeQuery()){
+	    while(rs.next()){
+		Donors d = new Donors();
+		d.setUserId(rs.getInt("user_id"));
+		d.setLastDonationDate(rs.getDate("donor_last_donation_date"));
+		d.setBloodName(rs.getString("blood_name"));
+		list.add(d);
+	    }
+	}
+	return list;
+    }
+    
+    public boolean deleteDonorByUserIdAndDate(int userId, Date date) throws SQLException{
+	String sql = "DELETE FROM donors WHERE donor_user_id = ? AND donor_last_donation_date = ?";
+	try(Connection conn = DBConnection.getConnection();
+	     PreparedStatement ps = conn.prepareStatement(sql)){
+	    ps.setInt(1, userId);
+	    ps.setDate(2, date);
+	    return ps.executeUpdate() > 0;
+	}
+    }
+    
     public boolean addDonor(Donors d) throws SQLException {
     return addDonation(d);
     }

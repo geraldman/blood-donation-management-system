@@ -34,6 +34,7 @@ public class RequestDAO {
                     rs.getInt("requester_blood_id"),
                     rs.getInt("requested_blood_quantity"),
 		    rs.getInt("requested_blood_fulfilled"),
+		    rs.getDate("requested_date"),
                     rs.getString("request_status")
                 );
                 rq.setUserName(rs.getString("user_name"));
@@ -43,6 +44,43 @@ public class RequestDAO {
         }
         return list;
     }
+    
+    public int getAllRequestCount() throws SQLException{
+	String sql = "SELECT COUNT(*) FROM requests";
+        try(Connection conn = DBConnection.getConnection();
+	    PreparedStatement ps = conn.prepareStatement(sql)){
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                return rs.getInt(1);
+            }
+        }
+        return 0;
+    }
+    
+        public int getTotalRequestsBloodQuantity() throws SQLException{
+	String sql = "SELECT SUM(requested_blood_quantity) FROM requests";
+	try(Connection conn = DBConnection.getConnection();
+	    PreparedStatement ps = conn.prepareStatement(sql);
+	    ResultSet rs = ps.executeQuery(sql)){
+	    if(rs.next()){
+		return rs.getInt(1);
+	    }
+	}
+	return 0;   
+    }
+    
+    public int getTotalRequestsBloodFullfiledQuantity() throws SQLException{
+	String sql = "SELECT SUM(requested_blood_fullfiled) FROM requests";
+	try(Connection conn = DBConnection.getConnection();
+	    PreparedStatement ps = conn.prepareStatement(sql);
+	    ResultSet rs = ps.executeQuery(sql)){
+	    if(rs.next()){
+		return rs.getInt(1);
+	    }
+	}
+	return 0;   
+    }
+	
     
     public List<Requests> findRequestByID(int userID) throws SQLException{
 	String sql = "SELECT b.blood_name, rq.*"
@@ -59,6 +97,7 @@ public class RequestDAO {
 			rs.getString("blood_name"),
 			rs.getInt("requested_blood_quantity"),
 			rs.getInt("requested_blood_fullfiled"),
+			rs.getDate("request_date"),
 			rs.getString("request_status")
 		    );
 		    list.add(r);
