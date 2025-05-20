@@ -43,11 +43,6 @@ contentType="text/html" pageEncoding="UTF-8"%>
       style="max-width: 400px; margin: 120px auto 60px auto"
     >
       <div style="text-align: center; margin-bottom: 24px">
-        <img
-          src="img/blood-drop.svg"
-          alt="BloodLife"
-          style="width: 48px; margin-bottom: 12px"
-        />
         <h2>Create Account</h2>
         <p style="color: var(--gray); font-size: 1rem">
           Register to join BloodLife

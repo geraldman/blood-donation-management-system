@@ -26,15 +26,19 @@
 		    </a>
 		    <nav class="main-navigation">
 			<ul>
+			    <li><a href="donate.jsp">Donate</a></li>
+			    <li><a href="donate-history.jsp">Donate History</a></li>
 			    <li><a href="request.jsp">Request</a></li>
-			    <li>
-				<a href="request-history.jsp" class="active">Request History</a>
-			    </li>
 			</ul>
 		    </nav>
 		    <div class="header-actions">
+			<% if (session.getAttribute("user") == null) { %>
 			<a href="login.jsp" class="text-button">Sign In</a>
 			<a href="register.jsp" class="primary-button">Register</a>
+			<% } else { %>
+			<a href="userdashboard.jsp" class="text-button">My Dashboard</a>
+			<a href="LogoutServlet" class="primary-button">Logout</a>
+			<% }%>
 		    </div>
 		    <button class="mobile-menu-button">
 			<i class="fas fa-bars"></i>

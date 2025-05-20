@@ -43,11 +43,6 @@
       style="max-width: 400px; margin: 120px auto 60px auto"
     >
       <div style="text-align: center; margin-bottom: 24px">
-        <img
-          src="img/blood-drop.svg"
-          alt="BloodLife"
-          style="width: 48px; margin-bottom: 12px"
-        />
         <h2>Welcome Back</h2>
         <p style="color: var(--gray); font-size: 1rem">
           Sign in to continue to BloodLife

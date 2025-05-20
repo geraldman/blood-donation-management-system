@@ -3,7 +3,10 @@ package dao;
 import model.Blood;
 import model.Donors;
 import java.sql.*;
+import java.sql.Date;
 import java.util.*;
+import java.time.temporal.ChronoUnit;
+import java.time.LocalDate;
 
 public class DonorDAO {
 
@@ -31,7 +34,49 @@ public class DonorDAO {
 	}
 	return BloodName;
     }
+    
+    public int getDonationCountByUser(int userId) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM donors WHERE donor_user_id = ?";
+        try(Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)){
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                return rs.getInt(1);
+            }
+        }
+        return 0;
+    }
+    
+    public Date getLastDonationDateByUser(int userId) throws SQLException {
+        String sql = "SELECT MAX(donor_last_donation_date) AS last_date FROM donors WHERE donor_user_id = ?";
+        try(Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)){
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                return rs.getDate("last_date");
+            }
+        }
+        return null;
+    }
+    
+    public int daysSinceLastDonation(Date lastDonationDate){
+	if (lastDonationDate == null){
+	    return -1;
+	}
 
+	LocalDate donationLocalDate = lastDonationDate.toLocalDate();
+	LocalDate today = LocalDate.now();
+
+	long daysBetween = ChronoUnit.DAYS.between(donationLocalDate, today);
+	return (int) daysBetween;
+    }
+    
+    public int findDaysSinceLastDonationByID(int userId) throws SQLException{
+	return daysSinceLastDonation(getLastDonationDateByUser(userId));
+    }
+    
     public List<Donors> findByUser(int userId) throws SQLException {
         String sql = "SELECT d.*, b.blood_name "
                    + "FROM donors d JOIN blood b ON d.donor_blood_id = b.blood_id "

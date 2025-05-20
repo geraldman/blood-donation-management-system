@@ -26,13 +26,19 @@
 		    </a>
 		    <nav class="main-navigation">
 			<ul>
-			    <li><a href="request.jsp">Request</a></li>
 			    <li><a href="donate-history.jsp">Donate History</a></li>
+			    <li><a href="request.jsp">Request</a></li>
+			    <li><a href="request-history.jsp">Request History</a></li>
 			</ul>
 		    </nav>
 		    <div class="header-actions">
+			<% if (session.getAttribute("user") == null) { %>
 			<a href="login.jsp" class="text-button">Sign In</a>
 			<a href="register.jsp" class="primary-button">Register</a>
+			<% } else { %>
+			<a href="userdashboard.jsp" class="text-button">My Dashboard</a>
+			<a href="LogoutServlet" class="primary-button">Logout</a>
+			<% }%>
 		    </div>
 		    <button class="mobile-menu-button">
 			<i class="fas fa-bars"></i>
@@ -47,10 +53,10 @@
 		    Fill the form to donate blood
 		</p>
 	    </div>
-	    <% if (request.getAttribute("error") != null) { %>
+	    <% if (request.getAttribute("error") != null) {%>
 	    <div class="error"><%=request.getAttribute("error")%></div>
-	    <% } 
-	    if(request.getAttribute("success") != null){%>
+	    <% }
+		if (request.getAttribute("success") != null) {%>
 	    <div class="success"><%=request.getAttribute("success")%></div>
 	    <%}%>
 	    <div>
@@ -80,27 +86,27 @@
 			<%@include file="includes/blood-dropdown.jsp" %>%>
 		    </select>
 		</div>
-<!--		<div class="form-group">
-		    <label for="quantity">Donation Quantity (bags)</label>
-		    <input
-			type="number"
-			id="quantity"
-			name="donor_donation_quantity"
-			min="1"
-			max="10"
-			placeholder="Enter quantity"
-			required
-			/>
-		</div>
-		<div class="form-group">
-		    <label for="lastDonation">Last Donation Date</label>
-		    <input
-			type="date"
-			id="lastDonation"
-			name="donor_last_donation_date"
-			required
-			/>
-		</div>-->
+		<!--		<div class="form-group">
+				    <label for="quantity">Donation Quantity (bags)</label>
+				    <input
+					type="number"
+					id="quantity"
+					name="donor_donation_quantity"
+					min="1"
+					max="10"
+					placeholder="Enter quantity"
+					required
+					/>
+				</div>
+				<div class="form-group">
+				    <label for="lastDonation">Last Donation Date</label>
+				    <input
+					type="date"
+					id="lastDonation"
+					name="donor_last_donation_date"
+					required
+					/>
+				</div>-->
 		<button type="submit" class="btn">Donate</button>
 	    </form>
 	</div>
