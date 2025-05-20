@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2025 at 06:19 AM
+-- Generation Time: May 20, 2025 at 10:04 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -59,12 +59,12 @@ CREATE TABLE `blood` (
 --
 
 INSERT INTO `blood` (`blood_id`, `blood_name`, `blood_stock`, `last_modified_by_admin_id`) VALUES
-(1, 'A-', 100, 1000),
+(1, 'A-', 102, 1000),
 (2, 'A+', 90, 1000),
 (3, 'B+', 2, 1000),
 (4, 'B-', 2, 1000),
 (5, 'AB+', 2, 1000),
-(6, 'AB-', 2, 1000),
+(6, 'AB-', 3, 1000),
 (7, 'O+', 2, 1000),
 (8, 'O-', 2, 1000);
 
@@ -86,8 +86,7 @@ CREATE TABLE `donors` (
 
 INSERT INTO `donors` (`donor_user_id`, `donor_last_donation_date`, `donor_blood_id`) VALUES
 (1, '2025-04-29', 1),
-(1, '2025-05-20', 1),
-(1, '2025-05-19', 4);
+(1, '2025-05-20', 6);
 
 -- --------------------------------------------------------
 
@@ -101,6 +100,7 @@ CREATE TABLE `requests` (
   `requester_blood_id` int(11) NOT NULL,
   `requested_blood_quantity` int(11) NOT NULL,
   `requested_blood_fullfiled` int(11) DEFAULT 0,
+  `request_date` date DEFAULT NULL,
   `request_status` enum('Served','Pending','Cancelled') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -108,9 +108,10 @@ CREATE TABLE `requests` (
 -- Dumping data for table `requests`
 --
 
-INSERT INTO `requests` (`request_id`, `requester_id`, `requester_blood_id`, `requested_blood_quantity`, `requested_blood_fullfiled`, `request_status`) VALUES
-(1, 2, 2, 20, 0, 'Pending'),
-(2, 1, 1, 10, 0, 'Pending');
+INSERT INTO `requests` (`request_id`, `requester_id`, `requester_blood_id`, `requested_blood_quantity`, `requested_blood_fullfiled`, `request_date`, `request_status`) VALUES
+(1, 2, 2, 20, 0, '2025-05-01', 'Pending'),
+(2, 1, 1, 10, 0, '2025-05-06', 'Pending'),
+(3, 2, 6, 3, 3, '2025-05-21', 'Served');
 
 -- --------------------------------------------------------
 
@@ -194,7 +195,7 @@ ALTER TABLE `blood`
 -- AUTO_INCREMENT for table `requests`
 --
 ALTER TABLE `requests`
-  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
