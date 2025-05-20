@@ -95,6 +95,15 @@ public class BloodDAO {
 	return null;
     }
     
+     public boolean incrementStock(int bloodId) throws SQLException {
+        String sql = "UPDATE blood SET blood_stock = blood_stock + 1 WHERE blood_id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, bloodId);
+            return ps.executeUpdate() > 0;
+        }
+    }
+    
     public boolean updateStock(int bloodId, int newStock, int adminId) throws SQLException {
         String sql = "UPDATE blood SET blood_stock = ?, last_modified_by_admin_id = ? WHERE blood_id = ?";
         try (Connection conn = DBConnection.getConnection();

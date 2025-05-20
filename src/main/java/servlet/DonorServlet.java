@@ -1,6 +1,7 @@
 package servlet;
 
 import model.Donors;
+import dao.BloodDAO;
 import model.Users;
 import dao.DonorDAO;
 import java.io.IOException;
@@ -39,7 +40,9 @@ public class DonorServlet extends HttpServlet {
             boolean success = donorDAO.addDonor(donor);
             
             if(success){
+		BloodDAO bloodInput = new BloodDAO();
 		request.setAttribute("success", "Your blood has been donated. Thank you for your donation!");
+		boolean donorSuccess = bloodInput.incrementStock(bloodId);
                 request.getRequestDispatcher("donate.jsp").forward(request, response);
             }
 	    else{
