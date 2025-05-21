@@ -16,6 +16,7 @@
 	    />
     </head>
     <body>
+	<%@include file="includes/dropdown-alert.jsp"%>
 	<header class="minimal-header">
 	    <div class="container">
 		<div class="header-wrapper">
@@ -57,7 +58,7 @@
 		    <label for="bloodType">Blood Type</label>
 		    <select
 			id="bloodType"
-			name="requester_blood_id"
+			name="bloodType"
 			required
 			style="
 			width: 100%;

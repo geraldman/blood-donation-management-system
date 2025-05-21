@@ -6,19 +6,29 @@ import java.util.*;
 
 public class RequestDAO {
 
-    public boolean addRequest(Requests r) throws SQLException {
-        String sql = "INSERT INTO requests (request_id, requester_id, requester_blood_id, requested_blood_quantity, request_status) "
-                   + "VALUES (NULL, ?, ?, ?, 'Pending')";
+    public boolean addRequest(Requests r) throws SQLException{
+        String sql = "INSERT INTO requests (request_id, requester_id, requester_blood_id, requested_blood_quantity, request_date, request_status) "
+                   + "VALUES (NULL, ?, ?, ?, ?, 'Pending')";
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+             PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setInt(1, r.getUserId());
             ps.setInt(2, r.getBloodId());
             ps.setInt(3, r.getQuantity());
+	    ps.setDate(4, r.getRequestDate());
             return ps.executeUpdate() == 1;
         }
     }
+    
+    public boolean deleteRequestById(int reqID) throws SQLException{
+	String sql = "DELETE FROM requests WHERE request_id = ?";
+	try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)){
+	    ps.setInt(1, reqID);
+	    return ps.executeUpdate() == 1;
+	}
+    }
 
-    public List<Requests> findAll() throws SQLException {
+    public List<Requests> findAll() throws SQLException{
         String sql = "SELECT rq.*, u.user_name, b.blood_name "
                    + "FROM requests rq "
                    + "JOIN users u ON rq.requester_id = u.user_id "
@@ -26,7 +36,7 @@ public class RequestDAO {
         List<Requests> list = new ArrayList<>();
         try (Connection conn = DBConnection.getConnection();
              Statement st = conn.createStatement();
-             ResultSet rs = st.executeQuery(sql)) {
+             ResultSet rs = st.executeQuery(sql)){
             while (rs.next()) {
                 Requests rq = new Requests(
                     rs.getInt("request_id"),
@@ -101,6 +111,7 @@ public class RequestDAO {
 			rs.getDate("request_date"),
 			rs.getString("request_status")
 		    );
+		    System.out.println(rs.getDate("request_date"));
 		    list.add(r);
 		}
 	    }

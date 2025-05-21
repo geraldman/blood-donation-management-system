@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import model.Users;
 
 public class AdminDAO {
     public Admin authenticateAdmin(String email, String password) throws SQLException {
@@ -68,5 +70,20 @@ public class AdminDAO {
 	    }
 	}
 	return list;
+    }
+    
+    public int registerAdmin(Admin u) throws SQLException{
+        String sql = "INSERT INTO admin (admin_id, admin_name, admin_email, admin_password) VALUES (NULL, ?, ?, ?)";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, u.getName());
+            ps.setString(2, u.getEmail());
+            ps.setString(3, u.getPassword());
+            int result  = ps.executeUpdate();
+            return result;
+        }
+        catch(SQLIntegrityConstraintViolationException e){
+            return -1;
+        }
     }
 }

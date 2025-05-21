@@ -25,14 +25,20 @@ public class RequestServlet extends HttpServlet {
         }
         
         int bloodId = Integer.parseInt(request.getParameter("bloodType"));
-        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        String bloodquantityStr = request.getParameter("requested_blood_quantity");
+	if(bloodquantityStr == null || bloodquantityStr.isEmpty()){
+	    response.sendRedirect("request.jsp?error=");
+	    return;
+	}
+	int bloodquantity = Integer.parseInt(bloodquantityStr);
 	LocalDate today = LocalDate.now();
+	Date formattedDate = Date.valueOf(today);
 		
         Requests bloodRequest = new Requests();
         bloodRequest.setRequesterId(user.getUserId());
         bloodRequest.setRequesterBloodId(bloodId);
-        bloodRequest.setRequestedBloodQuantity(quantity);
-	bloodRequest.setRequestDate(Date.valueOf(today));
+        bloodRequest.setRequestedBloodQuantity(bloodquantity);
+	bloodRequest.setRequestDate(formattedDate);
         bloodRequest.setRequestStatus("Pending");
         
         try {
@@ -40,13 +46,13 @@ public class RequestServlet extends HttpServlet {
             boolean success = requestDAO.addRequest(bloodRequest);
             
             if (success) {
-                response.sendRedirect("requester/dashboard.jsp?success=1");
+                response.sendRedirect("request.jsp?success=5");
             } else {
-                response.sendRedirect("requester/dashboard.jsp?error=1");
+                response.sendRedirect("request.jsp?error=5");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            response.sendRedirect("requester/dashboard.jsp?error=1");
+            response.sendRedirect("request.jsp?error=5");
         }
     }
     

@@ -15,6 +15,15 @@
 	else if(successMessage.equals("2")){
             successMessage = "Donation successfully added!";
         }
+	else if(successMessage.equals("3")){
+            successMessage = "Succesfully Deleted";
+        }
+	else if(successMessage.equals("4")){
+            successMessage = "Succesfully Cancelled";
+        }
+	else if(successMessage.equals("5")){
+            successMessage = "Request Successfully Made";
+        }
 %>
     <div id="Dropdown" class="dropdown-alert success show">
         <%= successMessage %>
@@ -29,6 +38,15 @@
 	if(errorMessage.equals("NotEnoughStock")){
 	    errorMessage = "Stock not enough to be served!";
 	}
+	else if(errorMessage.equals("3")){
+	    errorMessage = "Error! Can't be deleted!";
+	}
+	else if(errorMessage.equals("4")){
+	    errorMessage = "Error! Can't be cancelled!";
+	}
+	else if(errorMessage.equals("5")){
+	    errorMessage = "Error! Can't be requested!";
+	}
 %>
     <div id="Dropdown" class="dropdown-alert error show">
         <%= errorMessage %>
@@ -39,10 +57,10 @@
 <style>
     .dropdown-alert{
         position: fixed;
-        top: 20px;
+        top: 18px;
         left: 50%;
         transform: translateX(-50%);
-        padding: 12px 24px;
+        padding: 10px 24px;
         border-radius: 10px;
         font-weight: 600;
         font-size: 14px;
@@ -55,21 +73,20 @@
     }
 
     .dropdown-alert.show{
+	transition: opacity 0.5s, visibility 0.5s;
 	visibility: visible;
 	opacity: 1;
         display: block;
     }
 
     .dropdown-alert.success{
-        background-color: #f0fff4;
-        color: #2e7d32;
-        border-color: #2e7d32;
+        background-color: #388e42;
+        color: #ffffff;
     }
 
     .dropdown-alert.error{
-        background-color: #fff0f0;
-        color: #d32f2f;
-        border-color: #d32f2f;
+        background-color: #ff5147;
+        color: #ffffff;
     }
 </style>
 

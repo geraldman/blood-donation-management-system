@@ -24,6 +24,10 @@
         <servlet-name>ServeRequestServlet</servlet-name>
         <servlet-class>servlet.ServeRequestServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditBagServlet</servlet-name>
+        <servlet-class>servlet.EditBagServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Admin</servlet-name>
         <url-pattern>/Admin</url-pattern>
@@ -106,6 +110,10 @@
     <servlet-mapping>
         <servlet-name>ServeRequestServlet</servlet-name>
         <url-pattern>/ServeRequestServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditBagServlet</servlet-name>
+        <url-pattern>/EditBagServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

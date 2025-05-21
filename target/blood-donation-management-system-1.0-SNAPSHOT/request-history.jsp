@@ -69,7 +69,7 @@
 			    <%
 				int userID = (int) session.getAttribute("id");
 				RequestDAO dao = new RequestDAO();
-				List<Requests> list = dao.findRequestByID(userID);
+				List<Requests> list = dao.findRequestByUserID(userID);
 				if(list != null){
 				    for(Requests data : list){
 					String blood_name = data.getBloodName();
@@ -78,10 +78,10 @@
 					int requested_blood_fulfilled = data.getQuantityFulfilled();
 					String status = data.getStatus();
 					String status_css;
-					if(status.equals("Served")){
+					if(status.equals("served")){
 					    status_css = "served";
 					}
-					else if(status.equals("Pending")){
+					else if(status.equals("pending")){
 					    status_css = "pending";
 					}
 					else{

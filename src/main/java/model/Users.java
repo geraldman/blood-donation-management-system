@@ -18,7 +18,14 @@ public class Users{
         this.email    = email;
         this.password = password;
     }
+    
+    public Users(String name, String email, String password) {
+        this.name     = name;
+        this.email    = email;
+        this.password = password;
+    }
 
+    
     // core getters/setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }

@@ -54,7 +54,7 @@ public class Requests {
     public void	  setQuantityFulfilled(int a)	{ this.quantity_fulfilled = a; }
     
     public Date	  getRequestDate()		{ return request_date;}
-    public void	  setRequestDate(Date d)	{ this.request_date = (d!=null) ? d : new Date(System.currentTimeMillis());}
+    public void	  setRequestDate(Date d)	{ this.request_date = d;}
     
     public String getStatus()           { return status; }
     public void   setStatus(String s)   { this.status = s; }

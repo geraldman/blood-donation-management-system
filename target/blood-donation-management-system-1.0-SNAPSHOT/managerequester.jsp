@@ -55,19 +55,19 @@
 			<td><span class="status <%=status%>"><%=status%></span></td>
 			<td>
 			    <%if(status.equals("pending")){%>
-			    <form action="ServeRequestServlet" method="post" style="display: inline;">
+			    <form action="ServeRequestServlet" method="post" style="display: inline;" onsubmit="return confirmAction(event, 'Are you sure you want to SERVE this request?');">
 			    <input type="hidden" name="id" value="<%=requestID%>">
 			    <input type="hidden" name="status" value="Served">
 			    <button type="submit" class="action-btn approve-btn">Serve</button>
 			    </form>
-			    <form action="CancelRequestServlet" method="post" style="display: inline;">
+			    <form action="CancelRequestServlet" method="post" style="display: inline;" onsubmit="return confirmAction(event, 'Are you sure you want to CANCEL this request?');">
 			    <input type="hidden" name="id" value="<%=requestID%>">
 			    <input type="hidden" name="status" value="Cancel">
 			    <button type="submit" class="action-btn delete-btn">Cancel</button>
 			    </form>
 			    <% }
 			    else{%>
-			    <form action="DeleteRequestServlet" method="post" style="display: inline;">
+			    <form action="DeleteRequestServlet" method="post" style="display: inline;" onsubmit="return confirmAction(event, 'Are you sure you want to DELETE this request?');">
 			    <input type="hidden" name="id" value="<%=requestID%>">
 			    <input type="hidden" name="status" value="Cancel">
 			    <button type="submit" class="action-btn delete-btn">Delete</button>
@@ -80,3 +80,12 @@
 	    </div>
 	</div>
     </div>
+    <script>
+    function confirmAction(event, message) {
+        const confirmed = confirm(message);
+        if (!confirmed) {
+            event.preventDefault(); // stop form from submitting
+        }
+        return confirmed;
+    }
+    </script>
