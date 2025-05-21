@@ -33,8 +33,8 @@ public class RequestDAO {
                     rs.getInt("requester_id"),
                     rs.getInt("requester_blood_id"),
                     rs.getInt("requested_blood_quantity"),
-		    rs.getInt("requested_blood_fulfilled"),
-		    rs.getDate("requested_date"),
+		    rs.getInt("requested_blood_fullfiled"),
+		    rs.getDate("request_date"),
                     rs.getString("request_status")
                 );
                 rq.setUserName(rs.getString("user_name"));
@@ -82,7 +82,7 @@ public class RequestDAO {
     }
 	
     
-    public List<Requests> findRequestByID(int userID) throws SQLException{
+    public List<Requests> findRequestByUserID(int userID) throws SQLException{
 	String sql = "SELECT b.blood_name, rq.*"
 		    + "FROM requests rq "
 		    + "JOIN blood b ON rq.requester_blood_id = b.blood_id "
@@ -94,6 +94,7 @@ public class RequestDAO {
 	    try(ResultSet rs = ps.executeQuery()){	
 		while(rs.next()){
 		    Requests r = new Requests(
+			rs.getInt("requester_blood_id"),
 			rs.getString("blood_name"),
 			rs.getInt("requested_blood_quantity"),
 			rs.getInt("requested_blood_fullfiled"),
@@ -106,6 +107,31 @@ public class RequestDAO {
 	}
 	return list;
     }
+    
+    public Requests findRequestByRequestID(int requestID) throws SQLException{
+	String sql = "SELECT b.blood_name, rq.*"
+		    + "FROM requests rq "
+		    + "JOIN blood b ON rq.requester_blood_id = b.blood_id "
+		    + "WHERE rq.request_id = ?";
+	try(Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)){
+	    ps.setInt(1, requestID);
+	    try(ResultSet rs = ps.executeQuery()){	
+		while(rs.next()){
+		    Requests r = new Requests(
+			rs.getInt("requester_blood_id"),
+			rs.getString("blood_name"),
+			rs.getInt("requested_blood_quantity"),
+			rs.getInt("requested_blood_fullfiled"),
+			rs.getDate("request_date"),
+			rs.getString("request_status")
+		    );
+		    return r;
+		}
+	    }
+	}
+	return null;
+    }
 
     public boolean updateStatus(int requestId, String newStatus) throws SQLException {
         String sql = "UPDATE requests SET request_status = ? WHERE request_id = ?";
@@ -113,6 +139,16 @@ public class RequestDAO {
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, newStatus);
             ps.setInt(2, requestId);
+            return ps.executeUpdate() == 1;
+        }
+    }
+    
+    public boolean UpdateFulfilledBlood(int bloodAmount, int requestID) throws SQLException {
+        String sql = "UPDATE requests SET requested_blood_fullfiled = ? WHERE request_id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, bloodAmount);
+            ps.setInt(2, requestID);
             return ps.executeUpdate() == 1;
         }
     }

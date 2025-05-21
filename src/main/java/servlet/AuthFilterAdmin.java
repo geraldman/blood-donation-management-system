@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author geral
  */
-@WebFilter(urlPatterns = {"/admindashboard.jsp"})
+@WebFilter(urlPatterns = {"/admindashboard.jsp", "/managebloodstock.jsp", "/managerequester.jsp", "managedonors.jsp"})
 public class AuthFilterAdmin implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
 	    FilterChain chain)

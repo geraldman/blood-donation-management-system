@@ -18,7 +18,8 @@ public class Requests {
 
     public Requests() { }
     
-    public Requests(String bloodname, int quantity, int quantity_fulfilled, Date date,String status){
+    public Requests(int bloodID, String bloodname, int quantity, int quantity_fulfilled, Date date,String status){
+	this.bloodId = bloodID;
 	this.bloodName = bloodname;
 	this.quantity = quantity;
 	this.quantity_fulfilled = quantity_fulfilled;

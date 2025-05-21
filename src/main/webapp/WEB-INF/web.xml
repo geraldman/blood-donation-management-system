@@ -12,6 +12,18 @@
         <servlet-name>DeleteDonorServlet</servlet-name>
         <servlet-class>servlet.DeleteDonorServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CancelRequestServlet</servlet-name>
+        <servlet-class>servlet.CancelRequestServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteRequestServlet</servlet-name>
+        <servlet-class>servlet.DeleteRequestServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServeRequestServlet</servlet-name>
+        <servlet-class>servlet.ServeRequestServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Admin</servlet-name>
         <url-pattern>/Admin</url-pattern>
@@ -82,6 +94,18 @@
     <servlet-mapping>
         <servlet-name>DeleteDonorServlet</servlet-name>
         <url-pattern>/DeleteDonorServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelRequestServlet</servlet-name>
+        <url-pattern>/CancelRequestServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteRequestServlet</servlet-name>
+        <url-pattern>/DeleteRequestServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServeRequestServlet</servlet-name>
+        <url-pattern>/ServeRequestServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

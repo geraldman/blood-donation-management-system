@@ -135,7 +135,7 @@
 	</style>
     </head>
     <body>
-	<!-- Navbar Start -->
+	<%@include file="includes/dropdown-alert.jsp"%>
 	<header class="minimal-header">
 	    <div class="container">
 		<div class="header-wrapper">

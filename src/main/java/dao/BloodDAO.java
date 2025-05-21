@@ -117,6 +117,21 @@ public class BloodDAO {
         }
     }
     
+    public int getBloodStockAmountByBloodID(int bloodID) throws SQLException{
+	String sql = "SELECT blood_stock FROM blood WHERE blood_id = ?";
+	try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, bloodID);
+	    try(ResultSet rs = ps.executeQuery()){
+		if(rs.next()){
+		    int BloodStock = rs.getInt("blood_stock");
+		    return BloodStock;
+		}
+	    } 
+	}
+	return -1;
+    }
+	
     public boolean updateStock(int bloodId, int newStock, int adminId) throws SQLException {
         String sql = "UPDATE blood SET blood_stock = ?, last_modified_by_admin_id = ? WHERE blood_id = ?";
         try (Connection conn = DBConnection.getConnection();

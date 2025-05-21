@@ -25,7 +25,7 @@
     </div> 
     <div id="donors">
 	<div class="card">
-	    <h2>All Donors</h2>
+	    <h2>All Donors History</h2>
 	    <div class="history-table-wrapper">
 		<table class="history-table">
 		    <tr>
