@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2025 at 10:04 AM
+-- Generation Time: May 22, 2025 at 04:15 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,7 +39,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`admin_id`, `admin_name`, `admin_email`, `admin_password`) VALUES
-(1000, 'Gerald', 'gerald@gmail.com', 'geraldgerald');
+(1000, 'Gerald', 'gerald@gmail.com', 'geraldgerald'),
+(1001, 'useradmin1', 'admin1@gmail.com', 'adminadmin');
 
 -- --------------------------------------------------------
 
@@ -59,14 +60,14 @@ CREATE TABLE `blood` (
 --
 
 INSERT INTO `blood` (`blood_id`, `blood_name`, `blood_stock`, `last_modified_by_admin_id`) VALUES
-(1, 'A-', 102, 1000),
-(2, 'A+', 90, 1000),
-(3, 'B+', 2, 1000),
+(1, 'A-', 94, 1000),
+(2, 'A+', 87, 1000),
+(3, 'B+', 10, 1000),
 (4, 'B-', 2, 1000),
-(5, 'AB+', 2, 1000),
-(6, 'AB-', 3, 1000),
-(7, 'O+', 2, 1000),
-(8, 'O-', 2, 1000);
+(5, 'AB+', 10, 1000),
+(6, 'AB-', 7, 1000),
+(7, 'O+', 10, 1000),
+(8, 'O-', 10, 1000);
 
 -- --------------------------------------------------------
 
@@ -85,8 +86,9 @@ CREATE TABLE `donors` (
 --
 
 INSERT INTO `donors` (`donor_user_id`, `donor_last_donation_date`, `donor_blood_id`) VALUES
-(1, '2025-04-29', 1),
-(1, '2025-05-20', 6);
+(2, '2025-05-14', 1),
+(1, '2025-05-22', 6),
+(1, '2025-05-12', 8);
 
 -- --------------------------------------------------------
 
@@ -101,7 +103,7 @@ CREATE TABLE `requests` (
   `requested_blood_quantity` int(11) NOT NULL,
   `requested_blood_fullfiled` int(11) DEFAULT 0,
   `request_date` date DEFAULT NULL,
-  `request_status` enum('Served','Pending','Cancelled') DEFAULT NULL
+  `request_status` enum('served','pending','cancelled') DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -109,9 +111,8 @@ CREATE TABLE `requests` (
 --
 
 INSERT INTO `requests` (`request_id`, `requester_id`, `requester_blood_id`, `requested_blood_quantity`, `requested_blood_fullfiled`, `request_date`, `request_status`) VALUES
-(1, 2, 2, 20, 0, '2025-05-01', 'Pending'),
-(2, 1, 1, 10, 0, '2025-05-06', 'Pending'),
-(3, 2, 6, 3, 3, '2025-05-21', 'Served');
+(16, 1, 3, 3, 1, '2025-05-22', 'served'),
+(17, 1, 5, 10, 0, '2025-05-22', 'pending');
 
 -- --------------------------------------------------------
 
@@ -133,7 +134,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`user_id`, `user_name`, `user_email`, `user_password`) VALUES
 (1, 'Excel Viryan', 'excelviryan@gmail.com', 'excelganteng'),
 (2, 'Kevin Syonin', 'kevinsyonin@gmail.com', 'kevinganteng'),
-(3, 'dcfvgbhjkm', 'sfksn@gmail.com', 'suyfbsgf');
+(3, 'dcfvgbhjkm', 'sfksn@gmail.com', 'suyfbsgf'),
+(12, 'farrel', 'farrel@gmail.com', 'farrel');
 
 --
 -- Indexes for dumped tables
@@ -183,7 +185,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1001;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1002;
 
 --
 -- AUTO_INCREMENT for table `blood`
@@ -195,13 +197,13 @@ ALTER TABLE `blood`
 -- AUTO_INCREMENT for table `requests`
 --
 ALTER TABLE `requests`
-  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
